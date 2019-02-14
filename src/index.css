@@ -12,3 +12,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#root {
+  height: 100%;
+}
+
+#title {
+  margin-top: 12px;
+}
+
+#form {
+  margin: 12px 0;
+}
+
+#form input {
+  margin: 12px 0;
+}
+
+#players-table td,
+#players-table th {
+  vertical-align: middle;
+  height: 75px;
+  width: 25%;
+}
+
+#players-table thead {
+  background: #343A40;
+  color: #FFF;
+}
+
+#button {
+  padding: 12px 45px;
+}
+
+.loader {
+  margin: 0 auto;
+}
