@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { Button, Col, Form, Input, Row } from "reactstrap";
 import { connect } from "react-redux";
-import getPlayers from "./actionCreators/getPlayers";
+//import getPlayers from "./actionCreators/getPlayers";
 import changeName from "./actionCreators/changeName";
 import changePosition from "./actionCreators/changePosition";
 import changeAge from "./actionCreators/changeAge";
-import FilterLink from "./containers/FilterLink";
-import { VisibilityFilters } from "./actionCreators";
 
 class PlayersForm extends Component {
   render() {
@@ -16,17 +14,21 @@ class PlayersForm extends Component {
           <Form onSubmit={this.props.handleSubmit} inline={true} id="form">
             <Col xs="auto" md="3">
               <Input
+                id="playerName"
                 type="text"
-                value={this.props.name}
-                onChange={this.props.handleName}
+                defaultValue=""
+                //{this.props.name}
+                //onChange={this.props.handleName}
                 placeholder="Player Name"
               />
             </Col>
             <Col xs="auto" md="3" className="text-center">
               <Input
+                id="playerPosition"
                 type="select"
-                value={this.props.position}
-                onChange={this.props.handlePosition}
+                defaultValue=""
+                //value={this.props.position}
+                //onChange={this.props.handlePosition}
               >
                 <option value="">Select position</option>
                 <option value="Attacking Midfield">Attacking Midfield</option>
@@ -43,11 +45,12 @@ class PlayersForm extends Component {
             </Col>
             <Col xs="auto" md="3">
               <Input
-                type="text"
-                value={this.props.age}
-                onChange={this.props.handleAge}
-                placeholder="Age"
                 id="playerAge"
+                type="text"
+                defaultValue=""
+                //value={this.props.age}
+                //onChange={this.props.handleAge}
+                placeholder="Age"
               />
             </Col>
             <Col xs="auto" md="3" className="text-center">
@@ -56,10 +59,6 @@ class PlayersForm extends Component {
               </Button>
             </Col>
           </Form>
-          <FilterLink filter={VisibilityFilters.SHOW_ALL}>All</FilterLink>
-          <FilterLink filter={VisibilityFilters.SHOW_FILTERED}>
-            Filtered
-          </FilterLink>
         </Col>
       </Row>
     );
@@ -99,12 +98,19 @@ const mapDispatchToProps = dispatch => ({
   },
   handleSubmit(event) {
     event.preventDefault();
-    const playerAge = document.getElementById("playerAge");
-    if (playerAge.value >= 18 && playerAge.value <= 40) {
-      dispatch(getPlayers());
-    } else {
-      alert("Sorry but the age must be between 18 and 40.");
+    const { playerName, playerPosition, playerAge } = event.target;
+    //console.log(playerName.value, playerPosition.value, playerAge.value);
+    if (
+      (playerAge.value >= 18 && playerAge.value <= 40) ||
+      playerAge.value === ""
+    ) {
+      dispatch(changeName(playerName.value));
+      dispatch(changePosition(playerPosition.value));
+      dispatch(changeAge(playerAge.value));
     }
+    /* else {
+      alert("Sorry but the age must be between 18 and 40.");
+    }*/
   }
 });
 

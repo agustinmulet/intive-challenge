@@ -6,7 +6,6 @@ class PlayersTable extends React.Component {
     return (
       <Row>
         <Col className="text-center">
-          <button onClick={this.props.onClick}>test</button>
           {this.props.players.length ? (
             <Table bordered striped responsive id="players-table">
               <thead>
